@@ -25,7 +25,4 @@ print(my_word + '\n',len(my_word))
 # Ejemplo:
 # A N O N Y M O U S
 # _ _ _ _ _ _ _ _ _
-
-# la caja en la cual me escondo es azul y cuadrada..._
-
 print("-"*len(my_word))

@@ -1,5 +1,6 @@
 # Import modules to use
 from words import palabras
+import string
 import random
 
 # 1. Welcome
@@ -13,16 +14,42 @@ def get_valid_word(palabras):
   while '-' in word or ' ' in word: # While - or ' '
     word = random.choice(palabras)
 
-  return word
+  return word.upper()
 
-# Display word and its length
-my_word = get_valid_word(palabras)
-print(my_word + '\n',len(my_word))
+def hangman():
+
+  word = get_valid_word(palabras) # SOL
+  word_letters = set(word) # S, O , L
+  alphabet = set(string.ascii_uppercase) # A, B, C, D, E,...
+  used_letters = set()
+  lives = 6
+  print(type(word))
+  print("La palabra es: ",word_letters)
+
+  while len(word_letters) > 0:
+    user_letter = input('Guess a letter:').upper() # S
+
+    if user_letter in alphabet - used_letters: # si "S" esta en "A,B,C,D" - ""
+      used_letters.add(user_letter) # S
+      print(used_letters,'\n',word_letters)
+
+      if user_letter in word_letters: # S es parte de tu palabra
+        word_letters.remove(user_letter) # S, O , L le quito la S = O, L
 
 
-# Una función que despliegue los guiones
-# dependiendo el tamaño de la palabra
-# Ejemplo:
-# A N O N Y M O U S
-# _ _ _ _ _ _ _ _ _
-print("-"*len(my_word))
+      # else:
+      #   lives = lives - 1
+      #   print('Letter is not in word')
+
+    elif user_letter in used_letters:
+      print("You have already used that character. Please try again.")
+    else:
+      print("Invalid character. Please try again.")
+
+    if len(word_letters) == 0:
+      print("Your guessed the word: ", word)
+
+
+hangman()
+
+

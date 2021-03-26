@@ -1,5 +1,5 @@
 # Import modules to use
-from words import palabras
+from words import palabras,hangpics
 import string
 import random
 

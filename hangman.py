@@ -16,6 +16,8 @@ def get_valid_word(palabras):
 
   return word.upper()
 
+
+# Main function, init game
 def hangman():
 
   word = get_valid_word(palabras) # SOL
@@ -23,31 +25,40 @@ def hangman():
   alphabet = set(string.ascii_uppercase) # A, B, C, D, E,...
   used_letters = set()
   lives = 6
-  print(type(word))
-  print("La palabra es: ",word_letters)
 
-  while len(word_letters) > 0:
+
+
+  print("La palabra es: ",word)
+
+  while len(word_letters) > 0 and lives > 0:
+    print(f"You have {lives} lives left and you have used these letters: ",' '.join(used_letters))
+
+    # what letter you guess, example WORD (- - R D)
+    word_list = [letter if letter in used_letters else '-' for letter in word]
+
+    print("Current word: ", ' '.join(word_list),"\n")
+
     user_letter = input('Guess a letter:').upper() # S
 
     if user_letter in alphabet - used_letters: # si "S" esta en "A,B,C,D" - ""
       used_letters.add(user_letter) # S
-      print(used_letters,'\n',word_letters)
+      # print(used_letters,'\n',word_letters)
 
       if user_letter in word_letters: # S es parte de tu palabra
         word_letters.remove(user_letter) # S, O , L le quito la S = O, L
-
-
-      # else:
-      #   lives = lives - 1
-      #   print('Letter is not in word')
+      else:
+        lives = lives - 1
+        print('Letter is not in word')
 
     elif user_letter in used_letters:
       print("You have already used that character. Please try again.")
     else:
       print("Invalid character. Please try again.")
 
-    if len(word_letters) == 0:
-      print("Your guessed the word: ", word)
+  if lives == 0:
+    print("You died, The word was: ", word)
+  else:
+    print("You guessed the word: ", word,"!!! =)")
 
 
 hangman()

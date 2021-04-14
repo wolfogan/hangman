@@ -1,5 +1,5 @@
 # Import modules to use
-from words import palabras,hangpics
+from words import *
 import string
 import random
 
@@ -26,9 +26,7 @@ def hangman():
   used_letters = set()
   lives = 6
 
-
-
-  print("La palabra es: ",word)
+  print("The word is: ",word)
 
   while len(word_letters) > 0 and lives > 0:
     print(f"You have {lives} lives left and you have used these letters: ",' '.join(used_letters))
@@ -49,6 +47,7 @@ def hangman():
       else:
         lives = lives - 1
         print('Letter is not in word')
+        print(hangpics[-lives-1]) # Mortal line test
 
     elif user_letter in used_letters:
       print("You have already used that character. Please try again.")
